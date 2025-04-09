@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>TMIX Education</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="icon" type="image/png" href="./images/tmix.jpg">
 </head>
 <body class="bg-gray-100 text-gray-800 font-sans">
 
@@ -33,22 +34,37 @@
   <!-- 🏠 BODY -->
   <main class="mt-6 max-w-7xl mx-auto px-4">
     <!-- Banner -->
-    <section class="bg-blue-50 rounded-lg shadow-md mb-8">
-      <img src="https://source.unsplash.com/1200x400/?classroom,students" alt="Banner"
-          class="w-full h-60 object-cover rounded-t-lg" />
+    <section class="bg-blue-50 rounded-lg shadow-md mb-8 relative overflow-hidden">
+      <div class="relative h-60 rounded-t-lg">
+        <div id="slider" class="w-full h-full flex transition-transform duration-500">
+          <img src="https://images.unsplash.com/photo-1588072432836-e10032774350?auto=format&fit=crop&w=1200&h=400&q=80" class="w-full object-cover flex-shrink-0" alt="Slide 1" />
+          <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1200&h=400&q=80" class="w-full object-cover flex-shrink-0" alt="Slide 2" />
+          <img src="./images/OIP.jpg?auto=format&fit=crop&w=1200&h=400&q=80" class="w-full object-cover flex-shrink-0" alt="Slide 3" />
+        </div>
+    
+        <!-- Nút trái -->
+        <button onclick="moveSlide(-1)" class="absolute top-1/2 left-3 -translate-y-1/2 bg-white/70 hover:bg-white text-gray-800 rounded-full p-2 shadow">
+          &#10094;
+        </button>
+    
+        <!-- Nút phải -->
+        <button onclick="moveSlide(1)" class="absolute top-1/2 right-3 -translate-y-1/2 bg-white/70 hover:bg-white text-gray-800 rounded-full p-2 shadow">
+          &#10095;
+        </button>
+      </div>
+    
       <div class="p-6 text-center">
         <h1 class="text-3xl font-bold text-blue-800 mb-2">Chào mừng đến với TMIX EDUCATION</h1>
         <p class="text-gray-600 mb-4">Nâng tầm tri thức – Phát triển tương lai</p>
-    
-    <!-- 🔴 Nút Đăng ký học ngay -->
-    <a href="https://zalo.me/0977730167" 
-      target="_blank"
-      class="inline-block bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-6 rounded-full transition">
-      Đăng ký học ngay
-    </a>
- 
+        <a href="https://zalo.me/0977730167" 
+          target="_blank"
+          class="inline-block bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-6 rounded-full transition">
+          Đăng ký học ngay
+        </a>
       </div>
     </section>
+    
+    
 
 
     <!-- Giới thiệu -->
@@ -108,5 +124,34 @@
     <div class="text-center mt-4 text-sm text-gray-300">© 2025 TMIX EDUCATION. All rights reserved.</div>
   </footer>
 
+  <script>
+    const images = [
+      "https://images.unsplash.com/photo-1588072432836-e10032774350?auto=format&fit=crop&w=1200&h=400&q=80",
+      "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1200&h=400&q=80",
+      "./images/OIP.jpg?auto=format&fit=crop&w=1200&h=400&q=80"
+    ];
+
+  
+    let index = 0;
+    const container = document.getElementById("slide-container");
+  
+    setInterval(() => {
+      index = (index + 1) % images.length;
+      container.innerHTML = `<img src="${images[index]}" class="w-full h-60 object-cover" />`;
+    }, 4000); // đổi ảnh sau mỗi 4 giây
+  </script>
+
+  <script>
+    let currentSlide = 0;
+    const slider = document.getElementById("slider");
+    const totalSlides = slider.children.length;
+
+    function moveSlide(step) {
+      currentSlide = (currentSlide + step + totalSlides) % totalSlides;
+      slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+    }
+  </script>
+
+  
 </body>
 </html>
